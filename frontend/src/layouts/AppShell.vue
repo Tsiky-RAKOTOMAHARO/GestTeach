@@ -1,6 +1,7 @@
 <script setup>
 import AppSideBar from '@/components/common/AppSideBar.vue'
 import AppTopBar from '@/components/common/AppTopBar.vue'
+import AppToast from '@/components/common/AppToast.vue'
 import { RouterView } from 'vue-router'
 </script>
 
@@ -18,6 +19,7 @@ import { RouterView } from 'vue-router'
       </main>
     </div>
   </div>
+  <AppToast/>
 </template>
 
 <style scoped>
@@ -27,13 +29,13 @@ import { RouterView } from 'vue-router'
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  background: var(--color-surface-page);
 }
 
 .sidebar-container {
-  width: 250px;
+  width: 220px;
   height: 100%;
   flex-shrink: 0;
-  border-right: 1px solid #e2e8f0;
 }
 
 .main-content {
@@ -48,13 +50,12 @@ import { RouterView } from 'vue-router'
   width: 100%;
   height: 60px;
   flex-shrink: 0;
-  border-bottom: 1px solid #e2e8f0;
 }
 
 .page-content {
   flex: 1;
   width: 100%;
   overflow-y: auto;
-  padding: 24px;
+  padding: var(--space-6);
 }
 </style>
