@@ -48,10 +48,10 @@ async function validerSuppression() {
           <tr>
             <th>Matricule</th>
             <th>Nom</th>
-            <th>Prénoms</th>
+            <th>Prénom(s)</th>
             <th>Taux Horaire</th>
             <th>Nombre d'heures</th>
-            <th>Total à Payer</th>
+            <th>Prestation</th>
             <th>Actions</th>
           </tr>
         </thead>

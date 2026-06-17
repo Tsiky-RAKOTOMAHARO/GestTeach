@@ -19,6 +19,7 @@
         $body = json_decode(file_get_contents('php://input'), true);
 
         // assigner aux attributs du model
+        $this->model->matricule = $body['matricule'];
         $this->model->nom = $body['nom'];
         $this->model->prenom = $body['prenom'];
         $this->model->tauxHoraire = $body['tauxHoraire'];

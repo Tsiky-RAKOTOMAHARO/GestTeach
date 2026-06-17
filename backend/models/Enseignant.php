@@ -28,8 +28,8 @@
     }
     public function create(){
 
-        $stmt = mysqli_prepare($this->connexion, "INSERT INTO Enseignant(nom, prenom, tauxHoraire, nombreHeure) VALUES (?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, "ssdi", $this->nom, $this->prenom, $this->tauxHoraire, $this->nombreHeure);
+        $stmt = mysqli_prepare($this->connexion, "INSERT INTO Enseignant(matricule, nom, prenom, tauxHoraire, nombreHeure) VALUES (?,?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, "sssdi", $this->matricule, $this->nom, $this->prenom, $this->tauxHoraire, $this->nombreHeure);
 
         return mysqli_stmt_execute($stmt); //retourne true /false
 
@@ -41,7 +41,7 @@
                 "UPDATE Enseignant SET nom=?, prenom=?, tauxHoraire=?, nombreHeure=? WHERE matricule=?"
         );
 
-        mysqli_stmt_bind_param($stmt, "ssdii", $this->nom, $this->prenom, $this->tauxHoraire, $this->nombreHeure, $this->matricule);
+        mysqli_stmt_bind_param($stmt, "ssdis", $this->nom, $this->prenom, $this->tauxHoraire, $this->nombreHeure, $this->matricule);
 
 
         return mysqli_stmt_execute($stmt); //retourne true /false
@@ -50,7 +50,7 @@
     public function delete(){
 
         $stmt = mysqli_prepare($this->connexion,"DELETE FROM Enseignant WHERE matricule=?");
-        mysqli_stmt_bind_param($stmt, "i", $this->matricule);
+        mysqli_stmt_bind_param($stmt, "s", $this->matricule);
 
         
         return mysqli_stmt_execute($stmt); //retourne true /false

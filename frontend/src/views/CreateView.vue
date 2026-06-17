@@ -57,6 +57,7 @@ function allerALaListe() {
 }
 
 .create-body {
-  max-width: 720px;
+  width: 100%;
+  /* max-width: 720px; */
 }
 </style>

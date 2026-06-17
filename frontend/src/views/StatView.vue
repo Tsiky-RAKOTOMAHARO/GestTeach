@@ -23,7 +23,7 @@ onMounted(async () => {
 
     <div class="charts-grid">
       <BilanPie />
-      <BilantChart />
+      <!-- <BilantChart /> -->
     </div>
 
   </div>

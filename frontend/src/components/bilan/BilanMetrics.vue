@@ -11,7 +11,7 @@ const totalMasse = computed(() =>
 )
 
 const totalHeures = computed(() =>
-  store.enseignants.reduce((sum, e) => sum + e.nombreHeure, 0)
+  store.enseignants.reduce((sum, e) => sum + (Number(e.nombreHeure) || 0), 0)
 )
 
 const moyenneTaux = computed(() => {
@@ -35,7 +35,7 @@ const moyenneTaux = computed(() => {
     <div class="metric-card">
       <span class="metric-icon"></span>
       <div class="metric-body">
-        <p class="metric-label">Masse Salariale</p>
+        <p class="metric-label">Prestation Total</p>
         <p class="metric-value" style="color: #059669;">{{ totalMasse.toLocaleString() }}</p>
       </div>
     </div>
@@ -43,18 +43,18 @@ const moyenneTaux = computed(() => {
     <div class="metric-card">
       <span class="metric-icon"></span>
       <div class="metric-body">
-        <p class="metric-label">Total Heures</p>
+        <p class="metric-label">Salaire Maximum</p>
         <p class="metric-value" style="color: #7c3aed;">{{ totalHeures }}</p>
       </div>
     </div>
 
-    <!-- <div class="metric-card">
+    <div class="metric-card">
       <span class="metric-icon"></span>
       <div class="metric-body">
-        <p class="metric-label">Taux Moyen</p>
-        <p class="metric-value">{{ moyenneTaux }}</p>
+        <p class="metric-label">Salaire Minimum</p>
+        <p class="metric-value">{{ totalEnseignants}}</p>
       </div>
-    </div> -->
+    </div> 
 
   </div>
 </template>
@@ -62,7 +62,7 @@ const moyenneTaux = computed(() => {
 <style scoped>
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
 }
 
@@ -81,17 +81,6 @@ const moyenneTaux = computed(() => {
   box-shadow: 0 4px 20px rgba(83, 74, 183, 0.08);
 }
 
-/* .metric-icon {
-  font-size: 28px;
-  background: var(--color-primary-50);
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-} */
 
 .metric-body {
   display: flex;

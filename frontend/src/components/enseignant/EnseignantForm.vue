@@ -15,6 +15,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'sauvegarder', 'annuler'])
 
 const formVide = () => ({
+  matricule:'',
   nom: '',
   prenom: '',
   tauxHoraire: 0,
@@ -55,6 +56,10 @@ function soumettre() {
     <form @submit.prevent="soumettre" class="form-body">
 
       <div class="form-row">
+        <div class="field">
+          <label class="field-label">Matricule</label>
+          <input type="text" v-model="localEnseignant.matricule" class="field-input" placeholder="ENS-2024-001" required />
+        </div>
         <div class="field">
           <label class="field-label">Nom</label>
           <input type="text" v-model="localEnseignant.nom" class="field-input" required />

@@ -1,7 +1,7 @@
 use gestTeach;
 
     CREATE TABLE Enseignant(
-        matricule INT AUTO_INCREMENT PRIMARY KEY,
+        matricule VARCHAR(25) PRIMARY KEY,
         nom VARCHAR(150) NOT NULL,
         prenom VARCHAR(150),
         tauxHoraire DECIMAL(10,2),
