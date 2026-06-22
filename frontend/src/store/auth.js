@@ -2,17 +2,15 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
-    
-    const estConnecte = ref(!!localStorage.getItem('isLoggedIn'))
+
+    const estConnecte = ref(!!sessionStorage.getItem('isLoggedIn'))
     const messageErreur = ref('')
 
     async function connecter(userName, userPassword) {
         try {
             const response = await fetch('http://localhost:8000/index.php?action=login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userName, userPassword })
             })
 
@@ -21,10 +19,10 @@ export const useAuthStore = defineStore('auth', () => {
             if (response.ok) {
                 estConnecte.value = true
                 messageErreur.value = ''
-                
-                localStorage.setItem('isLoggedIn', 'true')
-                
-                return true 
+
+                sessionStorage.setItem('isLoggedIn', 'true')   
+
+                return true
             } else {
                 estConnecte.value = false
                 messageErreur.value = data.error || 'Erreur d\'authentification'
@@ -40,8 +38,8 @@ export const useAuthStore = defineStore('auth', () => {
     function deconnecter() {
         estConnecte.value = false
         messageErreur.value = ''
-        
-        localStorage.removeItem('isLoggedIn')
+
+        sessionStorage.removeItem('isLoggedIn')   
     }
 
     return {

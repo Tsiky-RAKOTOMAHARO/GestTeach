@@ -20,22 +20,22 @@ function gererDeconnexion() {
 
     <nav class="sidebar-nav">
       <RouterLink to="/create" class="nav-item">
-        <img class="nav-icon" src="../../assets/img/add.svg">
+        <span class="nav-icon icon-add"></span>
         <span>Ajout</span>
       </RouterLink>
       <RouterLink to="/list" class="nav-item">
-        <img class="nav-icon" src="../../assets/img/list.svg">
+        <span class="nav-icon icon-list"></span>
         <span>Liste</span>
       </RouterLink>
       <RouterLink to="/stats" class="nav-item">
-        <img class="nav-icon" src="../../assets/img/pieChart.svg" width="24" height="24"> 
+        <span class="nav-icon icon-stats"></span> 
         <span>Bilan</span>
       </RouterLink>
     </nav>
 
     <div class="sidebar-footer">
       <button @click="gererDeconnexion" class="logout-btn">
-        <img src="../../assets/img/logout.svg" alt="">
+        <span class="logout-icon"></span>
         <span>Déconnexion</span>
       </button>
     </div>
@@ -102,8 +102,39 @@ function gererDeconnexion() {
   font-weight: 600;
 }
 
-.nav-icon {
-  font-size: 16px;
+.nav-icon,
+.logout-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  flex-shrink: 0;
+}
+
+.icon-add {
+  -webkit-mask-image: url('../../assets/img/add.svg');
+  mask-image: url('../../assets/img/add.svg');
+}
+
+.icon-list {
+  -webkit-mask-image: url('../../assets/img/list.svg');
+  mask-image: url('../../assets/img/list.svg');
+}
+
+.icon-stats {
+  -webkit-mask-image: url('../../assets/img/pieChart.svg');
+  mask-image: url('../../assets/img/pieChart.svg');
+}
+
+.logout-icon {
+  -webkit-mask-image: url('../../assets/img/logout.svg');
+  mask-image: url('../../assets/img/logout.svg');
 }
 
 .sidebar-footer {

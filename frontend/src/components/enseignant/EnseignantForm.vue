@@ -25,6 +25,12 @@ const formVide = () => ({
 
 const localEnseignant = ref(formVide())
 
+const erreurs = ref({
+  matricule: '',
+  nom: '',
+  prenom: ''
+})
+
 watch(() => props.modelValue, (nouveau) => {
   if (nouveau) {
     localEnseignant.value = { ...nouveau }
@@ -33,10 +39,46 @@ watch(() => props.modelValue, (nouveau) => {
   }
 }, { immediate: true })
 
+function capitaliser(valeur) {
+  if (!valeur) return valeur
+  return valeur.charAt(0).toUpperCase() + valeur.slice(1)
+}
+
+function validerFormulaire() {
+  erreurs.value = { matricule: '', nom: '', prenom: '' }
+  let estValide = true
+
+  const regexMatricule = /^[A-Za-z]+-[0-9]+$/
+  if (!regexMatricule.test(localEnseignant.value.matricule)) {
+    erreurs.value.matricule = 'Format attendu : lettres-chiffres (ex: EN-01)'
+    estValide = false
+  }
+
+  if (!localEnseignant.value.nom || !localEnseignant.value.nom.trim()) {
+    erreurs.value.nom = 'Le nom est requis'
+    estValide = false
+  }
+
+  if (!localEnseignant.value.prenom || !localEnseignant.value.prenom.trim()) {
+    erreurs.value.prenom = 'Le prénom est requis'
+    estValide = false
+  }
+
+  return estValide
+}
+
 function soumettre() {
+  localEnseignant.value.nom = capitaliser((localEnseignant.value.nom || '').trim())
+  localEnseignant.value.prenom = capitaliser((localEnseignant.value.prenom || '').trim())
+
+  if (!validerFormulaire()) {
+    return
+  }
+
   emit('sauvegarder', { ...localEnseignant.value })
   if (!props.isEdit) {
     localEnseignant.value = formVide()
+    erreurs.value = { matricule: '', nom: '', prenom: '' }
   }
 }
 </script>
@@ -59,15 +101,34 @@ function soumettre() {
       <div class="form-row">
         <div class="field">
           <label class="field-label">Matricule</label>
-          <input type="text" v-model="localEnseignant.matricule" class="field-input" placeholder="ENS-2024-001" required />
+          <input
+            type="text"
+            v-model="localEnseignant.matricule"
+            class="field-input"
+            :class="{ 'field-input--error': erreurs.matricule }"
+            placeholder="EN-01"
+          />
+          <span v-if="erreurs.matricule" class="field-error">{{ erreurs.matricule }}</span>
         </div>
         <div class="field">
           <label class="field-label">Nom</label>
-          <input type="text" v-model="localEnseignant.nom" class="field-input" required />
+          <input
+            type="text"
+            v-model="localEnseignant.nom"
+            class="field-input"
+            :class="{ 'field-input--error': erreurs.nom }"
+          />
+          <span v-if="erreurs.nom" class="field-error">{{ erreurs.nom }}</span>
         </div>
         <div class="field">
           <label class="field-label">Prénom</label>
-          <input type="text" v-model="localEnseignant.prenom" class="field-input" required />
+          <input
+            type="text"
+            v-model="localEnseignant.prenom"
+            class="field-input"
+            :class="{ 'field-input--error': erreurs.prenom }"
+          />
+          <span v-if="erreurs.prenom" class="field-error">{{ erreurs.prenom }}</span>
         </div>
       </div>
 
@@ -164,6 +225,21 @@ function soumettre() {
 .field-input:focus {
   border-color: var(--color-surface-border-focus);
   background: var(--color-surface-card);
+}
+
+.field-input--error {
+  border-color: #A32D2D;
+  background: #FCEBEB;
+}
+
+.field-input--error:focus {
+  border-color: #A32D2D;
+}
+
+.field-error {
+  font-size: var(--text-sm);
+  color: #A32D2D;
+  font-family: var(--font-sans);
 }
 
 .form-actions {
