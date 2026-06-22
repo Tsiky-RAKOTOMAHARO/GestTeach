@@ -25,7 +25,7 @@ Sécurisée par authentification JWT et organisée en 3 modules fonctionnels.
 
 ```bash
 # 1. Cloner le projet
-git clone https://github.com/votre-org/gestens.git
+git clone 
 cd gestens/frontend
 
 # 2. Installer les dépendances
