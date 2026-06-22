@@ -14,10 +14,16 @@ const totalHeures = computed(() =>
   store.enseignants.reduce((sum, e) => sum + (Number(e.nombreHeure) || 0), 0)
 )
 
-const moyenneTaux = computed(() => {
-  if (!store.enseignants.length) return 0
-  const total = store.enseignants.reduce((sum, e) => sum + e.tauxHoraire, 0)
-  return (total / store.enseignants.length).toFixed(2)
+const min = computed(() => {
+  if (store.enseignants.length === 0) return '-'
+  const prestations = store.enseignants.map(e => (Number(e.tauxHoraire) || 0) * (Number(e.nombreHeure) || 0))
+  return Math.min(...prestations).toFixed(2)
+})
+
+const max = computed(() => {
+  if (store.enseignants.length === 0) return '-'
+  const prestations = store.enseignants.map(e => (Number(e.tauxHoraire) || 0) * (Number(e.nombreHeure) || 0))
+  return Math.max(...prestations).toFixed(2)
 })
 </script>
 
@@ -44,7 +50,7 @@ const moyenneTaux = computed(() => {
       <span class="metric-icon"></span>
       <div class="metric-body">
         <p class="metric-label">Salaire Maximum</p>
-        <p class="metric-value" style="color: #7c3aed;">{{ totalHeures }}</p>
+        <p class="metric-value" style="color: #7c3aed;">{{ max}}</p>
       </div>
     </div>
 
@@ -52,7 +58,7 @@ const moyenneTaux = computed(() => {
       <span class="metric-icon"></span>
       <div class="metric-body">
         <p class="metric-label">Salaire Minimum</p>
-        <p class="metric-value">{{ totalEnseignants}}</p>
+        <p class="metric-value">{{ min}}</p>
       </div>
     </div> 
 

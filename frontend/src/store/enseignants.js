@@ -66,7 +66,7 @@ export const useEnseignantStore = defineStore('enseignant', () =>{
         }
     }
 
-    async function supprimerEnseignant(matricule){
+    async function supprimerEnseignant(id){
         try{
            const response = await fetch('http://localhost:8000/index.php',
                 {
@@ -74,7 +74,7 @@ export const useEnseignantStore = defineStore('enseignant', () =>{
                     headers:{
                         'Content-type': 'application/json'
                     },
-                    body: JSON.stringify({matricule})
+                    body: JSON.stringify({id})
                 })
             if(response.ok){
                 message.value = 'Suppression réussie !'

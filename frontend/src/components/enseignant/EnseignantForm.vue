@@ -15,6 +15,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'sauvegarder', 'annuler'])
 
 const formVide = () => ({
+  id:null,
   matricule:'',
   nom: '',
   prenom: '',

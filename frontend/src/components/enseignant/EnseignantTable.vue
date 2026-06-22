@@ -10,7 +10,7 @@ const store = useEnseignantStore()
 
 const enseignantAModifier = ref(null)
 const afficherModalSuppression = ref(false)
-const matriculeASupprimer = ref(null)
+const enseignantASupprimer = ref(null)   // <- on garde l'objet complet, pas juste le matricule
 
 function activerEdition(enseignant) {
   enseignantAModifier.value = { ...enseignant }
@@ -23,17 +23,17 @@ async function soumettreModification(donneesModifiees) {
   enseignantAModifier.value = null
 }
 
-function ouvrirConfirmationSuppression(matricule) {
-  matriculeASupprimer.value = matricule
+function ouvrirConfirmationSuppression(enseignant) {   
+  enseignantASupprimer.value = enseignant
   afficherModalSuppression.value = true
 }
 function fermerModalSuppression() {
   afficherModalSuppression.value = false
-  matriculeASupprimer.value = null
+  enseignantASupprimer.value = null
 }
 async function validerSuppression() {
-  if (matriculeASupprimer.value) {
-    await store.supprimerEnseignant(matriculeASupprimer.value)
+  if (enseignantASupprimer.value) {
+    await store.supprimerEnseignant(enseignantASupprimer.value.id)
     fermerModalSuppression()
   }
 }
@@ -80,7 +80,7 @@ async function validerSuppression() {
 
     <AppModal :visible="afficherModalSuppression" @close="fermerModalSuppression">
       <DeleteConfirm
-        :itemIdentifier="matriculeASupprimer"
+        :itemIdentifier="enseignantASupprimer?.matricule"
         @confirm="validerSuppression"
         @cancel="fermerModalSuppression"
       />

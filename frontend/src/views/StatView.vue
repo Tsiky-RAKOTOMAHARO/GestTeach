@@ -4,6 +4,7 @@ import { useEnseignantStore } from '../store/enseignants'
 import BilanMetrics from '../components/bilan/BilanMetrics.vue'
 import BilanPie from '../components/bilan/BilanPie.vue'
 import BilantChart from '../components/bilan/BilantChart.vue'
+import BilanPie_min_max from '../components/bilan/BilanPie_min_max.vue'
 
 const store = useEnseignantStore()
 
@@ -23,7 +24,7 @@ onMounted(async () => {
 
     <div class="charts-grid">
       <BilanPie />
-      <!-- <BilantChart /> -->
+      <BilanPie_min_max />
     </div>
 
   </div>

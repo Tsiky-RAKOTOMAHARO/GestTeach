@@ -40,6 +40,7 @@
 
         $body = json_decode(file_get_contents('php://input'), true);
 
+        $this->model->id = $body['id'];
         $this->model->matricule = $body['matricule'];
         $this->model->nom = $body['nom'];
         $this->model->prenom = $body['prenom'];
@@ -60,7 +61,7 @@
         
         $body = json_decode(file_get_contents('php://input'), true);
 
-        $this->model->matricule = $body['matricule'];
+        $this->model->id = $body['id'];
 
         $status = $this->model->delete();
 

@@ -4,6 +4,7 @@
     private $connexion;
 
     // attributs
+    public $id;
     public $matricule;
     public $nom;
     public $prenom;
@@ -38,10 +39,10 @@
 
         $stmt = mysqli_prepare(
                 $this->connexion,
-                "UPDATE Enseignant SET nom=?, prenom=?, tauxHoraire=?, nombreHeure=? WHERE matricule=?"
+                "UPDATE Enseignant SET matricule=?, nom=?, prenom=?, tauxHoraire=?, nombreHeure=? WHERE id=?"
         );
 
-        mysqli_stmt_bind_param($stmt, "ssdis", $this->nom, $this->prenom, $this->tauxHoraire, $this->nombreHeure, $this->matricule);
+        mysqli_stmt_bind_param($stmt, "sssdii", $this->matricule, $this->nom, $this->prenom, $this->tauxHoraire, $this->nombreHeure, $this->id);
 
 
         return mysqli_stmt_execute($stmt); //retourne true /false
@@ -49,8 +50,8 @@
     }
     public function delete(){
 
-        $stmt = mysqli_prepare($this->connexion,"DELETE FROM Enseignant WHERE matricule=?");
-        mysqli_stmt_bind_param($stmt, "s", $this->matricule);
+        $stmt = mysqli_prepare($this->connexion,"DELETE FROM Enseignant WHERE id=?");
+        mysqli_stmt_bind_param($stmt, "i", $this->id);
 
         
         return mysqli_stmt_execute($stmt); //retourne true /false

@@ -22,7 +22,7 @@ async function gererConnexion() {
     <div class="login-card">
 
       <div class="login-header">
-        <span class="login-icon">🎓</span>
+        <img src="../assets/img/education.png" class="login-icon" width="24" height="24">
         <h1 class="login-title">GestTeach</h1>
         <p class="login-subtitle">Panneau de gestion</p>
       </div>

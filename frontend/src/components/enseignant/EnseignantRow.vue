@@ -24,7 +24,7 @@ const emit = defineEmits(['editer', 'supprimer'])
     <td>
       <div class="action-group">
         <button class="btn-edit" @click="emit('editer', enseignant)">Modifier</button>
-        <button class="btn-delete" @click="emit('supprimer', enseignant.matricule)">Supprimer</button>
+        <button class="btn-delete" @click="emit('supprimer', enseignant)">Supprimer</button>
       </div>
     </td>
   </tr>
